@@ -1,5 +1,5 @@
 class IngredientsController < ApplicationController
-
+  before_action :set_ingredient, only: [:edit, :update]
 
   def new
     @ingredient = Ingredient.new
@@ -19,11 +19,11 @@ class IngredientsController < ApplicationController
   end
 
   def edit
-    @ingredient = Ingredient.find(params[:id])
+
   end
 
   def update
-    @ingredient = Ingredient.find(params[:id])
+
     @ingredient.update(ingredient_params)
 
     if @ingredient.save
@@ -36,6 +36,10 @@ class IngredientsController < ApplicationController
 
 
   private
+
+  def set_ingredient
+    @ingredient = Ingredient.find(params[:id])
+  end 
 
   def ingredient_params
     params.require(:ingredient).permit(:name)
